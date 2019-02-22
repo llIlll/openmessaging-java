@@ -18,6 +18,7 @@
 package io.openmessaging.internal;
 
 import io.openmessaging.KeyValue;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,24 +32,20 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DefaultKeyValue implements KeyValue {
     private Map<String, String> properties;
 
-    @Override
-    public int getShort(String key) {
-        return 0;
+    public DefaultKeyValue() {
+        properties = new ConcurrentHashMap<String, String>();
     }
 
     @Override
-    public int getShort(String key, short defaultValue) {
-        return 0;
+    public KeyValue put(String key, boolean value) {
+        properties.put(key, String.valueOf(value));
+        return this;
     }
 
     @Override
     public KeyValue put(String key, short value) {
         properties.put(key, String.valueOf(value));
         return this;
-    }
-
-    public DefaultKeyValue() {
-        properties = new ConcurrentHashMap<String, String>();
     }
 
     @Override
@@ -73,6 +70,32 @@ public class DefaultKeyValue implements KeyValue {
     public KeyValue put(String key, String value) {
         properties.put(key, String.valueOf(value));
         return this;
+    }
+
+    @Override
+    public boolean getBoolean(String key) {
+        if (!properties.containsKey(key)) {
+            return false;
+        }
+        return Boolean.valueOf(properties.get(key));
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return properties.containsKey(key) ? getBoolean(key) : defaultValue;
+    }
+
+    @Override
+    public short getShort(String key) {
+        if (!properties.containsKey(key)) {
+            return 0;
+        }
+        return Short.valueOf(properties.get(key));
+    }
+
+    @Override
+    public short getShort(String key, short defaultValue) {
+        return properties.containsKey(key) ? getShort(key) : defaultValue;
     }
 
     @Override

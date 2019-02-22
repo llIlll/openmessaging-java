@@ -34,6 +34,15 @@ import java.util.Set;
  * @since OMS 1.0.0
  */
 public interface KeyValue {
+
+    /**
+     * Inserts or replaces {@code boolean} value for the specified key.
+     *
+     * @param key the key to be placed into this {@code KeyValue} object
+     * @param value the value corresponding to <tt>key</tt>
+     */
+    KeyValue put(String key, boolean value);
+
     /**
      * Inserts or replaces {@code short} value for the specified key.
      *
@@ -75,6 +84,27 @@ public interface KeyValue {
     KeyValue put(String key, String value);
 
     /**
+     * Searches for the {@code boolean} property with the specified key in this {@code KeyValue} object. If the key is not
+     * found in this property list, false is returned.
+     *
+     * @param key the property key
+     * @return the value in this {@code KeyValue} object with the specified key value
+     * @see #put(String, boolean)
+     */
+     boolean getBoolean(String key);
+
+    /**
+     * Searches for the {@code boolean} property with the specified key in this {@code KeyValue} object. If the key is not
+     * found in this property list, false is returned.
+     *
+     * @param key the property key
+     * @param defaultValue a default value
+     * @return the value in this {@code KeyValue} object with the specified key value
+     * @see #put(String, boolean)
+     */
+    boolean getBoolean(String key, boolean defaultValue);
+
+    /**
      * Searches for the {@code short} property with the specified key in this {@code KeyValue} object. If the key is not
      * found in this property list, zero is returned.
      *
@@ -82,7 +112,7 @@ public interface KeyValue {
      * @return the value in this {@code KeyValue} object with the specified key value
      * @see #put(String, short)
      */
-    int getShort(String key);
+    short getShort(String key);
 
     /**
      * Searches for the {@code short} property with the specified key in this {@code KeyValue} object. If the key is not
@@ -93,7 +123,7 @@ public interface KeyValue {
      * @return the value in this {@code KeyValue} object with the specified key value
      * @see #put(String, short)
      */
-    int getShort(String key, short defaultValue);
+    short getShort(String key, short defaultValue);
 
     /**
      * Searches for the {@code int} property with the specified key in this {@code KeyValue} object. If the key is not
